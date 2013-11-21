@@ -31,14 +31,15 @@
     NSMutableData *responseData;
 }
 
-@synthesize request, queue, completionHandler;
+@synthesize request, queue, completionHandler, updateHandler;
 
-+ (UNIUrlConnection *)sendAsynchronousRequest:(NSURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void(^)(NSURLResponse *response, NSData *data, NSError *error))completionHandler
++ (UNIUrlConnection *)sendAsynchronousRequest:(NSURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void(^)(NSURLResponse *response, NSData *data, NSError *error))completionHandler updateHandler:(void(^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))updateHandler
 {
     UNIUrlConnection *result = [[UNIUrlConnection alloc] init];
     result.request = request;
     result.queue = queue;
     result.completionHandler = completionHandler;
+    result.updateHandler = updateHandler;
     [result start];
     return result;
 }
@@ -63,6 +64,7 @@
 {
     [connection cancel]; connection = nil;
     completionHandler = nil;
+    updateHandler = nil;
 }
 
 - (void)connection:(NSURLConnection *)_connection didReceiveResponse:(NSHTTPURLResponse *)_response
@@ -96,6 +98,13 @@
         void(^b)(NSURLResponse *response, NSData *data, NSError *error) = completionHandler;
         completionHandler = nil;
         [queue addOperationWithBlock:^{b(self->response, self->responseData, error);}];
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+    if (updateHandler) {
+        void(^b)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) = updateHandler;
+        [queue addOperationWithBlock:^{b(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);}];
     }
 }
 

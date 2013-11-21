@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, UNIHTTPMethod) {
 typedef void (^UNIHTTPStringResponseBlock)(UNIHTTPStringResponse* stringResponse, NSError* error);
 typedef void (^UNIHTTPBinaryResponseBlock)(UNIHTTPBinaryResponse* binaryResponse, NSError* error);
 typedef void (^UNIHTTPJsonResponseBlock)(UNIHTTPJsonResponse* jsonResponse, NSError* error);
+typedef void (^UNIHTTPUpdateBlock)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite);
 
 @interface UNIHTTPRequest : NSObject
 
@@ -53,14 +54,14 @@ typedef void (^UNIHTTPJsonResponseBlock)(UNIHTTPJsonResponse* jsonResponse, NSEr
 
 -(UNIHTTPStringResponse*) asString;
 -(UNIHTTPStringResponse*) asString:(NSError**) error;
--(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response;
+-(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response onUpdate:(UNIHTTPUpdateBlock) update;
 
 -(UNIHTTPBinaryResponse*) asBinary;
 -(UNIHTTPBinaryResponse*) asBinary:(NSError**) error;
--(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response;
+-(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response onUpdate:(UNIHTTPUpdateBlock) update;
 
 -(UNIHTTPJsonResponse*) asJson;
 -(UNIHTTPJsonResponse*) asJson:(NSError**) error;
--(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response;
+-(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response onUpdate:(UNIHTTPUpdateBlock) update;
 
 @end

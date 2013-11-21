@@ -57,12 +57,16 @@
     return [[UNIHTTPStringResponse alloc] initWithSimpleResponse:response];
 }
 
--(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response {
+-(UNIUrlConnection*) asStringAsync:(UNIHTTPStringResponseBlock) response onUpdate:(UNIHTTPUpdateBlock) update {
     return [UNIHTTPClientHelper requestAsync:self handler:^(UNIHTTPResponse * res, NSError * error) {
         if (error != nil) {
             response(nil, error);
         } else {
             response([[UNIHTTPStringResponse alloc] initWithSimpleResponse:res], error);
+        }
+    } updateHandler:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+        if (update) {
+            update(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
         }
     }];
 }
@@ -77,12 +81,16 @@
     return [[UNIHTTPBinaryResponse alloc] initWithSimpleResponse:response];
 }
 
--(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response {
+-(UNIUrlConnection*) asBinaryAsync:(UNIHTTPBinaryResponseBlock) response onUpdate:(UNIHTTPUpdateBlock) update {
     return [UNIHTTPClientHelper requestAsync:self handler:^(UNIHTTPResponse * res, NSError * error) {
         if (error != nil) {
             response(nil, error);
         } else {
             response([[UNIHTTPBinaryResponse alloc] initWithSimpleResponse:res], error);
+        }
+    } updateHandler:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+        if (update) {
+            update(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
         }
     }];
 }
@@ -97,12 +105,16 @@
     return [[UNIHTTPJsonResponse alloc] initWithSimpleResponse:response];
 }
 
--(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response {
+-(UNIUrlConnection*) asJsonAsync:(UNIHTTPJsonResponseBlock) response onUpdate:(UNIHTTPUpdateBlock) update {
     return [UNIHTTPClientHelper requestAsync:self handler:^(UNIHTTPResponse * res, NSError * error) {
         if (error != nil) {
             response(nil, error);
         } else {
             response([[UNIHTTPJsonResponse alloc] initWithSimpleResponse:res], error);
+        }
+    } updateHandler:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+        if (update) {
+            update(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
         }
     }];
 }

@@ -207,7 +207,7 @@
     return [self getResponse:response data:data];
 }
 
-+(UNIUrlConnection*) requestAsync:(UNIHTTPRequest*) request handler:(void (^)(UNIHTTPResponse*, NSError*))handler {
++(UNIUrlConnection*) requestAsync:(UNIHTTPRequest*) request handler:(void (^)(UNIHTTPResponse*, NSError*))handler updateHandler:(void(^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))updateHandler {
     NSMutableURLRequest* requestObj = [self prepareRequest:request];
     NSOperationQueue *mainQueue = [[NSOperationQueue alloc] init];
     
@@ -216,6 +216,10 @@
         UNIHTTPResponse* res = [self getResponse:response data:data];
         handler(res, connectionError);
  
+    } updateHandler:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+    
+        updateHandler(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
+    
     }];
     
     return connection;

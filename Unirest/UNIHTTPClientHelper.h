@@ -37,6 +37,6 @@ typedef void (^UNIAsyncResponse)(UNIHTTPJsonResponse* jsonResponse, NSError* err
 
 +(UNIHTTPResponse*) requestSync:(UNIHTTPRequest*) request error:(NSError**) error;
 
-+(UNIUrlConnection*) requestAsync:(UNIHTTPRequest*) request handler:(void (^)(UNIHTTPResponse*, NSError*))handler;
++(UNIUrlConnection*) requestAsync:(UNIHTTPRequest*) request handler:(void (^)(UNIHTTPResponse*, NSError*))handler updateHandler:(void(^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))updateHandler;
 
 @end

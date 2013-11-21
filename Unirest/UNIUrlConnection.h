@@ -30,8 +30,9 @@
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, strong) NSOperationQueue *queue;
 @property (nonatomic, copy) void(^completionHandler)(NSURLResponse *response, NSData *data, NSError *error);
+@property (nonatomic, copy) void(^updateHandler)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite);
 
-+ (UNIUrlConnection *)sendAsynchronousRequest:(NSURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void(^)(NSURLResponse *response, NSData *data, NSError *error))completionHandler;
++ (UNIUrlConnection *)sendAsynchronousRequest:(NSURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void(^)(NSURLResponse *response, NSData *data, NSError *error))completionHandler updateHandler:(void(^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))updateHandler;
 - (void)start;
 - (void)cancel;
 
