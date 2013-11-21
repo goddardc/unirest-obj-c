@@ -28,6 +28,7 @@
 		A9E78BFA16E9803E006B80FD /* UNIHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BEB16E9803E006B80FD /* UNIHTTPResponse.m */; };
 		A9E78BFB16E9803E006B80FD /* UNIHTTPStringResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BED16E9803E006B80FD /* UNIHTTPStringResponse.m */; };
 		A9E78BFC16E9803E006B80FD /* UNIJsonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E78BEF16E9803E006B80FD /* UNIJsonNode.m */; };
+		B817062E183E9249003E1602 /* meow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B817062D183E9249003E1602 /* meow.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		A9E78BED16E9803E006B80FD /* UNIHTTPStringResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPStringResponse.m; sourceTree = "<group>"; };
 		A9E78BEE16E9803E006B80FD /* UNIJsonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIJsonNode.h; sourceTree = "<group>"; };
 		A9E78BEF16E9803E006B80FD /* UNIJsonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIJsonNode.m; sourceTree = "<group>"; };
+		B817062D183E9249003E1602 /* meow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = meow.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 			children = (
 				A9E78BC916E9801F006B80FD /* UnirestTests.h */,
 				A9E78BCA16E9801F006B80FD /* UnirestTests.m */,
+				B817062D183E9249003E1602 /* meow.jpg */,
 				A9E78BC416E9801F006B80FD /* Supporting Files */,
 			);
 			path = UnirestTests;
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9E78BC816E9801F006B80FD /* InfoPlist.strings in Resources */,
+				B817062E183E9249003E1602 /* meow.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -246,6 +246,8 @@
         NSAssert(response == nil, @"Response should be nil");
         NSAssert(error != nil, @"Error should be not nil");
         hasCalledBack = YES;
+    } onUpdate:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+
     }];
 
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:5];
@@ -273,6 +275,8 @@
         
         NSAssert(200 == response.code, @"Invalid code %d", response.code);
         hasCalledBack = YES;
+    } onUpdate:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+        
     }];
 
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:5];
@@ -298,6 +302,8 @@
         
         NSAssert(200 == response.code, @"Invalid code %d", response.code);
         hasCalledBack = YES;
+    } onUpdate:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+        
     }];
     
     [connection cancel];
